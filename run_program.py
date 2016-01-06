@@ -110,13 +110,93 @@ print predictedLocation
 # If for a query, more than two locations are predicted, returned the one with maximum number of tokens.
 _predictedLocation = []
 for eachPredictedLocation in predictedLocation:
-        if len(eachPredictedLocation) == 0:
-            _predictedLocation.append([])
-        elif len(eachPredictedLocation) == 1:
-            _predictedLocation.append(eachPredictedLocation)
+##    if len(eachPredictedLocation) > 0:
+##        for eachElement in eachPredictedLocation:
+        if len(eachPredictedLocation) == 1:
+            _predictedLocation.append(eachPredictedLocation[0])
         elif len(eachPredictedLocation) > 1:
             _predictedLocation.append(eachPredictedLocation[-1])
+        elif len(eachPredictedLocation) == 0:
+            _predictedLocation.append('NA')
+                
+       
+# Get index of location term from the list of tokens
+candidateRelationWords = []
+indexOfLocationInTokens = []
+for i in range(len(_predictedLocation)):
+    if _predictedLocation[i] == 'NA':
+        indexOfLocationInTokens.append('NA')
+    else:
+        # Check if the predicted location consists of two or more tokens. If yes, return the index of the first token in the tokenizedQueries
+        if ' ' in _predictedLocation[i]:
+            indexOfLocationInTokens.append(tokenizedQueries[i].index(_predictedLocation[i].split()[0]))
+        elif not ' ' in _predictedLocation[i]:
+            indexOfLocationInTokens.append(tokenizedQueries[i].index(_predictedLocation[i]))
+    
+# Get candidate words for relation type
+candidateRelationTypeWords = []
+for j in range(len(tokenizedQueries)):
+    if type(indexOfLocationInTokens[j]) == int:
+        candidateRelationTypeWords.append(tokenizedQueries[j][0: indexOfLocationInTokens[j]])
+    else:
+        candidateRelationTypeWords.append('NA')
+
+# Form nGrams from three words prior to the location term in query
+nGramsCandidateRelationWords = []
+for eachCandidateRelationWord in candidateRelationTypeWords:
+    # 'NA' symbolizes that no location term could be found in the query. [] implies that all the tokens in the query are locations and no candidate relation word could be obtained.
+    if (len(eachCandidateRelationWord) > 0 and eachCandidateRelationWord == 'NA'):
+        # NA_Type_1: No location word found in query. Hence, no relation type word.
+        nGramsCandidateRelationWords.append('NA_Type_1')
+    elif len(eachCandidateRelationWord) == 0:
+        # NA_Type_2: All query tokens combined are location name.
+        nGramsCandidateRelationWords.append('NA_Type_2')
+    else:
+        nGramsCandidateRelationWords.append(findNgram(eachCandidateRelationWord))
+
+################################################################################
+# Match candidate relation type words with the pre defined relation types given
+################################################################################
+# Read predefined realtion types from file. 
+# Pre defined relation types are in the file in the inputFiles folder
+with open('./inputFiles/geoRelationTypeDictionary', 'r') as f:
+    listGeoRelationType = f.read().split()
+
+_listGeoRelationType = []
+for eachGeoRelation in listGeoRelationType:
+    if ('_' in eachGeoRelation):
+        _listGeoRelationType.append(eachGeoRelation.replace("_", " "))
+    else:
+        _listGeoRelationType.append(eachGeoRelation)
+
+# Match candidate relation words with the dictionary of relation words
+geoRelationWord = []
+for eachNGramCandidateRelation in nGramsCandidateRelationWords:
+    tempGeoRelation = []
+    if eachNGramCandidateRelation == 'NA_Type_1':
+        tempGeoRelation.append('NA_Type_1')
+    elif eachNGramCandidateRelation == 'NA_Type_2':    
+        tempGeoRelation.append('NA_Type_2')
+    else:
+        for eachInnerListItem in eachNGramCandidateRelation:
+            if eachInnerListItem in _listGeoRelationType:
+                tempGeoRelation.append(eachInnerListItem)
+##            else:
+##                # NA_Type_3 : No geo relation type in the query though it is has a location term
+##                tempGeoRelation.append('NA_Type_3')
+    geoRelationWord.append(tempGeoRelation)                
+
+# In case for a query we get multiple geo relation type words, retain the last one. Considering that the word just before Location name has a higher probability of defining geo relation.
+_geoRelationWord = []
+for m in range(len(geoRelationWord)):
+    if not len(geoRelationWord[m]) == 0:
+            for n in range(len(geoRelationWord[m])):
+                if geoRelationWord[m][n] == 'NA_Type_1' or geoRelationWord[m][n] == 'NA_Type_2':
+                    _geoRelationWord.append('Not Found')
+                else:
+                    _geoRelationWord.append(geoRelationWord[m][-1])
+    else:
+        _geoRelationWord.append('Not Found')
         
-#             
-    
-    
+        
+
