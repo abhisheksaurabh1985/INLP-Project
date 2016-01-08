@@ -61,9 +61,11 @@ def getMetrics (correctlyTaggedQueries, predictionResults, totalQueries, totalLo
     return precision, recall, f1Score
 
 def getCoordinates (location):
-    geolocator = Nominatim()
-    location = geolocator.geocode(location)
-
+    try:
+        geolocator = Nominatim()
+        location = geolocator.geocode(location)
+    except NoneType:
+        print 'NoneType: object has no attribute longitude'
     return location.longitude, location.latitude
 
 

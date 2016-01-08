@@ -1,0 +1,104 @@
+[[('7', 'CD'), ('day', 'NN'), ('weather', 'NN'), ('welwyn', 'NN'), ('garden', 'NN'), ('city', 'NN')], 
+
+[('7', 'CD'), ('juniper', 'NN'), ('path', 'NN'), ('lanssale', 'NN'), ('pa', 'NN'), ('19446', 'CD')], 
+
+[('7', 'CD'), ('news', 'NN'), ('colorado', 'NN')], [('abc', 'NN'), ('news', 'NN'), ('chicago', 'IN')], [('aberdeen', 'IN'), ('airport', 'NN')], 
+
+[('aberystwyth', 'NN')], 
+
+[('adirondack', 'NN'), ('mountains', 'NNS')], 
+
+[('adirondack', 'NN'), ('park', 'VBD')], 
+
+[('alabama', 'NN'), ('schools', 'NNS')], 
+
+[('alabama', 'NN'), ('shakespeare', 'VBP'), ('festival', 'NN')], [('alameda', 'NN'), ('superior', 'NN'), ('court', 'NN')], 
+
+[('alamogordo', 'NN'), ('daily', 'RB'), ('news', 'NN')], 
+
+[('articles', 'NNS'), ('written', 'VBN'), ('in', 'IN'), ('2006', 'CD'), ('on', 'IN'), ('taxation', 'NN'), ('of', 'IN'), ('electronic', 'JJ'), ('commerce', 'NN')], 
+
+[('attitudes', 'NNS'), ('to', 'TO'), ('education', 'NN'), ('in', 'IN'), ('young', 'JJ'), ('people', 'NNS')], 
+
+[('bellevue', 'NN'), ('fireplace', 'NN'), ('store', 'NN')], 
+
+[('bendigo', 'IN'), ('cinemas', 'NNS')], 
+
+[('bluefield', 'NN'), ('regional', 'JJ'), ('medical', 'JJ'), ('center', 'NN')], [('bluefish', 'JJ')], 
+
+[('bmw', 'NN'), ('canada', 'NN')], 
+
+[('bodrum', 'NN'), ('hotels', 'NNS')], 
+
+[('bookshop', 'NN'), ('in', 'IN'), ('singapore', 'NN')], 
+
+[('breast', 'NN'), ('cancer', 'NN'), ('care', 'NN')], 
+
+[('bumper', 'NN'), ('to', 'TO'), ('bumper', 'VB'), ('auto', 'NN'), ('parts', 'NNS'), ('shreveport', 'NN'), ('la', 'NN')], 
+
+[('bus', 'NN'), ('trips', 'NNS'), ('from', 'IN'), ('columbia', 'NN')], 
+
+[('cabins', 'NNS'), ('to', 'TO'), ('rent', 'VB'), ('at', 'IN'), ('lake', 'NN'), ('tahoe', 'NN')], 
+
+[('campbell', 'NN'), ('river', 'NN'), ('bc', 'NN')], 
+
+[('cannon', 'NN'), ('mountain', 'NN')], 
+
+[('carpathian', 'JJ'), ('mountains', 'NNS')], 
+
+[('carpet', 'NN'), ('cleaners', 'NNS'), ('in', 'IN'), ('fort', 'NN'), ('walton', 'NN'), ('beach', 'NN'), ('fl', 'NN'), ('florida', 'NN')], 
+
+[('christie', 'NN'), ('lake', 'VBP')], 
+
+[('clearwater', 'NN'), ('beach', 'VBP'), ('hostels', 'NNS')], 
+
+[('columbia', 'NN'), ('clothing', 'NN')], 
+
+[('columbia', 'NN'), ('river', 'NN'), ('gorge', 'NN')], 
+
+[('convert', 'NN'), ('kilometers', 'NNS'), ('to', 'TO'), ('miles', 'NNS')], [('cyprus', 'NN'), ('italian', 'VBD'), ('food', 'NN')], 
+
+[('dictionary', 'JJ'), ('from', 'IN'), ('english', 'JJ'), ('to', 'TO'), ('spanish', 'VB')], 
+
+[('dinosaur', 'PRP$'), ('national', 'JJ'), ('monument', 'NN')], 
+
+[('discount', 'NN'), ('airline', 'NN'), ('tickets', 'NNS'), ('to', 'TO'), ('brazil', 'VB')], 
+
+[('doctors', 'NNS'), ('hospital', 'VBP'), ('augusta', 'NN'), ('ga', 'NN')], 
+
+[('dodge', 'NN'), ('park', 'VBD'), ('in', 'IN'), ('wisconsin', 'NN')], 
+
+[('drain', 'NN'), ('repairing', 'VBG'), ('mountain', 'NN'), ('view', 'NN'), ('ca', 'MD')], 
+
+[('dubai', 'NN'), ('police', 'NN')], 
+
+[('earn', 'NN'), ('extra', 'NN'), ('income', 'NN'), ('in', 'IN'), ('singapore', 'NN')], 
+
+[('east', 'NN'), ('bay', 'NN')], [('flight', 'NN'), ('to', 'TO'), ('key', 'JJ'), ('west', 'NN'), ('florida', 'NN')], 
+
+[('florida', 'NN'), ('tax', 'NN'), ('free', 'JJ'), ('shopping', 'NN')], 
+
+[('fort', 'NN'), ('pulaski', 'NN'), ('national', 'JJ'), ('monument', 'NN')], 
+
+[('free', 'JJ'), ('wav', 'NN'), ('to', 'TO'), ('mp3', 'NNP'), ('converter', 'NN')], 
+
+[('fun', 'NN'), ('things', 'NNS'), ('to', 'TO'), ('do', 'VB'), ('near', 'IN'), ('maldon', 'NN')], 
+
+[('galleria', 'NN'), ('cinemas', 'VBD')], 
+
+[('games', 'NNS'), ('to', 'TO'), ('play', 'VB'), ('at', 'IN'), ('parties', 'NNS')], 
+
+[('glen', 'NN'), ('canyon', 'VBD')], 
+
+[('herald', 'NN'), ('and', 'CC'), ('news', 'NN'), ('klamath', 'NN'), ('falls', 'NNS')], 
+
+[('house', 'NN'), ('to', 'TO'), ('buy', 'VB'), ('in', 'IN'), ('mississauga', 'NN')], 
+
+[('how', 'WRB'), ('to', 'TO'), ('invest', 'VB'), ('in', 'IN'), ('stock', 'NN')], 
+
+[('jameson', 'NN'), ('inn', 'NN'), ('crestview', 'NN'), ('fl', 'NN')], 
+
+[('lakeside', 'NN'), ('mall', 'VBD'), ('in', 'IN'), ('michigan', 'NN')], 
+
+[('law', 'NN'), ('blog', 'VBD'), ('in', 'IN'), ('singapore', 'NN')], [('list', 'NN'), ('of', 'IN'), ('restaurants', 'NNS'), ('in', 'IN'), ('ottawa', 'NN')], [('macdougall', 'NN'), ('dr', 'NN'), ('in', 'IN'), ('atlanta', 'NN')], [('men', 'NNS'), ('shoes', 'VBZ')], [('minibus', 'NN'), ('trips', 'NNS'), ('in', 'IN'), ('cyprus', 'NN')], [('nansemond', 'NN'), ('county', 'NN'), ('virginia', 'NN')], [('new', 'JJ'), ('car', 'NN'), ('dealer', 'NN'), ('albuquerque', 'NN')], [('newbury', 'NN'), ('weekly', 'RB'), ('news', 'NN')], [('niagara', 'NN'), ('day', 'NN'), ('tours', 'NNS'), ('from', 'IN'), ('toronto', 'IN')], [('north', 'JJ'), ('olmsted', 'VBN'), ('apartments', 'NNS')], [('northwest', 'NN'), ('airlines', 'NNS')], [('ozark', 'NN'), ('city', 'NN'), ('schools', 'NNS')], [('pacific', 'JJ'), ('coffee', 'NN')], [('palm', 'NN'), ('beach', 'VBP'), ('post', 'NN'), ('times', 'NNS')], [('paradise', 'NN'), ('valley', 'NN'), ('community', 'NN'), ('college', 'NN')], [('permission', 'NN'), ('letter', 'NN'), ('for', 'IN'), ('child', 'NN'), ('to', 'TO'), ('be', 'VB'), ('on', 'IN'), ('television', 'NN')], [('pine', 'NN'), ('view', 'VBD'), ('high', 'JJ'), ('school', 'NN')], [('plumbers', 'NNS'), ('in', 'IN'), ('manhattan', 'NN'), ('ny', 'NN'), ('new', 'JJ'), ('york', 'NN')], [('porter', 'NN'), ('central', 'JJ'), ('rd', 'NN'), ('ohio', 'NN')], [('poultry', 'NN'), ('farming', 'VBG'), ('training', 'NN'), ('in', 'IN'), ('the', 'DT'), ('limpopo', 'NN'), ('province', 'NN')], [('price', 'NN'), ('to', 'TO'), ('sales', 'NNS'), ('ratio', 'NN')], [('products', 'NNS'), ('to', 'TO'), ('import', 'NN'), ('from', 'IN'), ('cuba', 'NN')], [('province', 'NN'), ('of', 'IN'), ('british', 'JJ'), ('columbia', 'NN')], [('questionnaires', 'NNS'), ('on', 'IN'), ('physical', 'JJ'), ('activity', 'NN'), ('in', 'IN'), ('south', 'NN'), ('africa', 'NN')], [('questions', 'NNS'), ('to', 'TO'), ('ask', 'VB'), ('at', 'IN'), ('an', 'DT'), ('interview', 'NN')], [('rainforest', 'NN'), ('cafe', 'NN'), ('chicago', 'RB')], [('seattle', 'NN'), ('family', 'NN'), ('law', 'NN'), ('attorney', 'NN')], [('shoreham', 'NN'), ('weather', 'NN')], [('shores', 'NNS'), ('of', 'IN'), ('panama', 'NN')], [('shreveport', 'NN'), ('airport', 'NN')], [('siena', 'NN'), ('apartments', 'NNS')], [('society', 'NN'), ('changes', 'NNS'), ('from', 'IN'), ('1915', 'CD'), ('to', 'TO'), ('2005', 'CD')], [('things', 'NNS'), ('to', 'TO'), ('do', 'VB'), ('in', 'IN'), ('charlotte', 'NN'), ('north', 'NN'), ('carolina', 'NN')], [('top', 'JJ'), ('rated', 'VBN'), ('fitness', 'NN'), ('gyms', 'NNS'), ('in', 'IN'), ('washington', 'NN'), ('dc', 'NN')], [('travel', 'NN'), ('tips', 'NNS'), ('to', 'TO'), ('the', 'DT'), ('northwest', 'JJS'), ('usa', 'NN')], [('united', 'VBD'), ('states', 'NNS'), ('embassy', 'NN')], [('vice', 'NN'), ('president', 'NN'), ('of', 'IN'), ('trust', 'NN'), ('at', 'IN'), ('frontier', 'JJR'), ('bank', 'NN'), ('in', 'IN'), ('everett', 'NN'), ('washington', 'NN')], [('villas', 'NNS'), ('to', 'TO'), ('rent', 'VB'), ('in', 'IN'), ('south', 'NN'), ('west', 'NN'), ('majorca', 'NN')], [('wet', 'NN'), ('place', 'NN')], [('whalen', 'NN'), ('furniture', 'NN')], [('which', 'WDT'), ('airport', 'NN'), ('is', 'VBZ'), ('near', 'IN'), ('to', 'TO'), ('st', 'VB'), ('julians', 'NNS'), ('in', 'IN'), ('malta', 'NN')], [('whirlpool', 'NN'), ('dishwashers', 'NNS')], [('woody', 'NN'), ('allen', 'VBN')]]
+

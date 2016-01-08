@@ -97,7 +97,7 @@ for _PredictedLocation in _predictedLocation:
         isLocalQuery.append('NO')
     
 '''
-Find geo-relation word
+Find geo-relation word. First find candidate relation type words for each query. Then match those with the pre defined relation types given in project description.
 '''
 # Get index of location term from the list of tokens
 candidateRelationWords = []
@@ -134,9 +134,6 @@ for eachCandidateRelationWord in candidateRelationTypeWords:
     else:
         nGramsCandidateRelationWords.append(findNgram(eachCandidateRelationWord))
 
-################################################################################
-# Match candidate relation type words with the pre defined relation types given
-################################################################################
 # Read predefined realtion types from file. 
 # Pre defined relation types are in the file in the inputFiles folder
 with open('./inputFiles/geoRelationTypeDictionary', 'r') as f:
@@ -242,12 +239,17 @@ for eachWhatTerm in whatTermInQueryIterTwo:
 '''
 Latitude and Longitude of a place. Python module Geopy has been used to get the coordinates of a location.
 '''
-_geoCoordinates = []
-for _everyPredictedLocation in _predictedLocation:
-    if _everyPredictedLocation != 'NA':
-        _geoCoordinates.append(getCoordinates(_everyPredictedLocation))
-    else:
-        _geoCoordinates.append('')
+##_geoCoordinates = []
+##for _everyPredictedLocation in _predictedLocation:
+##    if _everyPredictedLocation != 'NA':
+##        _geoCoordinates.append(getCoordinates(_everyPredictedLocation))
+##    else:
+##        _geoCoordinates.append('')
     
 # Round the geo coordinates to 2 digits and format it as '40.23,<space>-75.30'
-' 
+##for _eachGeoCoordinate in _geoCoordinates:
+##    if _eachGeoCoordinate != '':
+##        for eachCoordinate in _eachGeoCoordinate:
+##            eachCoordinate = round(eachCoordinate, 2)
+##    else:
+##        _eachGeoCoordinate = ''
