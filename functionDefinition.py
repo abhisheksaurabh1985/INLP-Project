@@ -1,5 +1,7 @@
+from __future__ import division
 from xml.etree import ElementTree
 from collections import OrderedDict
+from geopy.geocoders import Nominatim
 
 def xmlToDict(filename):
     tree = ElementTree.parse(filename)
@@ -33,6 +35,36 @@ def findNgram(listWords):
     # Append bigrams and trigrams in single list
     ngramList = unigramList + bigramList + trigramList
     return(ngramList)
+
+def comparePredictions(predictIsLocal, actIsLocal, predictWhat, actWhat, predictWhatType, actWhatType, predictGeoRelation,
+                       actGeoRelation, actWhere, predictWhere ):
+    #This function returns a tuple (correctlyTaggedQueries, predictionResults)
+    predictionResults = []
+    correctlyTaggedQueries = 0
+    for i in range(0,len(predictIsLocal)):
+
+        if (predictIsLocal[i] == actIsLocal[i]) & (predictWhat[i] == actWhat[i]) & (predictWhatType[i] == actWhatType[i])\
+                &(predictGeoRelation[i] == actGeoRelation[i]) & (actWhere[i] == predictWhere[i]):
+            predictionResults.append('1')
+            correctlyTaggedQueries+= 1
+        else:
+            predictionResults.append('0')
+
+
+    return correctlyTaggedQueries, predictionResults
+
+def getMetrics (correctlyTaggedQueries, predictionResults, totalQueries, totalLocalQueries):
+    precision = correctlyTaggedQueries / totalQueries
+    recall = correctlyTaggedQueries / totalLocalQueries
+    f1Score = 2* precision* recall / (precision + recall)
+
+    return precision, recall, f1Score
+
+def getCoordinates (location):
+    geolocator = Nominatim()
+    location = geolocator.geocode(location)
+
+    return location.longitude, location.latitude
 
 
 

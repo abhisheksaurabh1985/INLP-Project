@@ -36,7 +36,7 @@ candidateLocationsFirstIter = []
 for eachTaggedQuery in taggedTokenizedQueries:
     tempCandidateLocation = []
     for token, pos in eachTaggedQuery:
-        if (pos == 'NNP' or pos == 'NN' or pos == 'IN' or pos == 'CD'):
+##        if (pos == 'NNP' or pos == 'NN' or pos == 'IN' or pos == 'CD'):
             tempCandidateLocation.append(token)
     candidateLocationsFirstIter.append(tempCandidateLocation)
 ##print candidateLocationsFirstIter
@@ -49,6 +49,9 @@ for eachItem in candidateLocationsFirstIter:
     nGramCandidateLocation.append(tempNGram)
 ##print nGramCandidateLocation
     
+'''
+Find if the query is local. If a location term is found, then query is said to be local.
+'''
 # Search nGrams in dbPedia for match
 predictedLocation = []
 for eachListItem in nGramCandidateLocation:
@@ -85,7 +88,17 @@ for eachPredictedLocation in predictedLocation:
         elif len(eachPredictedLocation) == 0:
             _predictedLocation.append('NA')
                 
-       
+# If query contains a location term, then refer the query as a local query.
+isLocalQuery = []
+for _PredictedLocation in _predictedLocation:
+    if _PredictedLocation != 'NA':
+        isLocalQuery.append('YES')
+    else:
+        isLocalQuery.append('NO')
+    
+'''
+Find geo-relation word
+'''
 # Get index of location term from the list of tokens
 candidateRelationWords = []
 indexOfLocationInTokens = []
@@ -168,25 +181,28 @@ for m in range(len(geoRelationWord)):
 '''
 Finding the 'WHAT' in the query:
 Query sans 'location name' and 'geo relation type' word is the 'WHAT' term.
-Step 1: Tokenize the 'location name' and 'geo relation type'.
-Step 2: Combine the two tokens and make a set.
-Step 3: Take the set difference with the tokenized query and convert the resulting set to list.
-Step 4: Join the list items. Result would be the 'WHAT' term in the queries.
+Step 1: Tokenize the 'location name'and 'geo relation' words.
+Step 2: Remove the resulting tokens from the tokenized query one by one.
+Step 3: Concatene the resulting tokens to get the WHAT term. List _predictedWhatTerm contains the predicted what terms.
 '''
-whatTermInQuery = []
 tokensLocation = []
 tokensRelationType = []
-for elm in range(len(_predictedLocation)):
+
+for elmLoc in range(len(_predictedLocation)):
     tempTokensLocation = []
-    tempTokensRelationType = []
-    if (not _predictedLocation[elm]  == 'NA' and not _geoRelationWord[elm] == 'Not Found'):
-        tempTokensLocation.append(word_tokenize(_predictedLocation[elm]))
-        tempTokensRelationType.append(word_tokenize(_geoRelationWord[elm]))
+    if not _predictedLocation[elmLoc] == 'NA':
+        tempTokensLocation.append(word_tokenize(_predictedLocation[elmLoc]))
     else:
         tempTokensLocation.append([])
+    tokensLocation.append(tempTokensLocation)    
+
+for elmRel in range(len(_geoRelationWord)):
+    tempTokensRelationType = []
+    if not _geoRelationWord[elmRel] == 'Not Found':
+        tempTokensRelationType.append(word_tokenize(_geoRelationWord[elmRel]))
+    else:
         tempTokensRelationType.append([])
-    tokensLocation.append(tempTokensLocation)
-    tokensRelationType.append(tempTokensRelationType)
+    tokensRelationType.append(tempTokensRelationType)    
 
 # Unpack list
 _tokensLocation = []
@@ -199,4 +215,39 @@ for eachInnerList2 in tokensRelationType:
 	for each2 in eachInnerList2:
 		_tokensRelationType.append(each2)        
 
-# Merge list of tokens and relation types
+# In each tokenizedQuery remove the corresponding tokens from _tokensLocation and _tokensRelationType
+whatTermInQueryIterOne = []
+for count1 in range(len(_tokensLocation)):
+    if _predictedLocation[count1] != 'NA':
+        tempSetTokensLocation = set()
+        tempResult1 = []
+        tempSetTokensLocation = set(_tokensLocation[count1])
+        tempResult1 = [x for x in tokenizedQueries[count1] if x not in tempSetTokensLocation]
+        whatTermInQueryIterOne.append(tempResult1)
+    else:
+        whatTermInQueryIterOne.append([])
+    
+whatTermInQueryIterTwo = []
+for count2 in range(len(_tokensRelationType)):
+    tempSetRelationType = set()
+    tempResult2 = []
+    tempSetRelationType = set(_tokensRelationType[count2])
+    tempResult2 = [x for x in whatTermInQueryIterOne[count2] if x not in tempSetRelationType]
+    whatTermInQueryIterTwo.append(tempResult2)
+    
+_predictedWhatTerm = []
+for eachWhatTerm in whatTermInQueryIterTwo:
+    _predictedWhatTerm.append(' '.join(eachWhatTerm))
+
+'''
+Latitude and Longitude of a place. Python module Geopy has been used to get the coordinates of a location.
+'''
+_geoCoordinates = []
+for _everyPredictedLocation in _predictedLocation:
+    if _everyPredictedLocation != 'NA':
+        _geoCoordinates.append(getCoordinates(_everyPredictedLocation))
+    else:
+        _geoCoordinates.append('')
+    
+# Round the geo coordinates to 2 digits and format it as '40.23,<space>-75.30'
+' 
