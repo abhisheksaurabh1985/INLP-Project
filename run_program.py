@@ -21,40 +21,6 @@ for keyOuter, valuesOuter in dictQueries.iteritems():
         if keyInner == 'QUERY':
             listQueries.append(valuesInner)
 
-# Extract proper nouns
-
-# Words to be discarded while searching location names
-with open('./commonnounlist.txt', 'r') as fileObj1:
-    commonNounWords = fileObj1.read().split()
-
-with open('./wordsEn.txt', 'r') as fileObj2:
-    commonEnglishWords = fileObj2.read().split()
-
-# Common English words contain some location names. For e.g. america, england etc. These words will have to removed from this list. The resulting list shall be used to filter
-# out the words from the tagged queries.
-with open('./prominentLocationNames.txt', 'r') as fileObj3:
-    prominentLocationNames = fileObj3.read().split()
-# Change location names to lower case
-prominentLocationNames = [element.lower() for element in prominentLocationNames]
-
-# Get set difference between commonEnglishWords and prominentLocationNames
-_commonEnglishWords = list(set(commonEnglishWords).difference(set(prominentLocationNames)))
-ignoreWords = commonNounWords + _commonEnglishWords
-
-# Stemming of the words to be discarded
-commonNounWordsStemmed = []
-porter_stemmer = PorterStemmer()
-for eachCommonNounWord in commonNounWords:
-    commonNounWordsStemmed.append(porter_stemmer.stem(eachCommonNounWord))
-
-commonEnglishWordsStemmed = []
-for eachCommonEnglishWord in commonEnglishWords:
-    commonEnglishWordsStemmed.append(porter_stemmer.stem(eachCommonEnglishWord))
-
-ignoreWordsStemmed = []
-for eachIgnoreWords in ignoreWords:
-    ignoreWordsStemmed.append(porter_stemmer.stem(eachIgnoreWords))
-
 # Tokenize queries
 tokenizedQueries = []
 for eachQuery in listQueries:
@@ -144,12 +110,13 @@ for j in range(len(tokenizedQueries)):
 # Form nGrams from three words prior to the location term in query
 nGramsCandidateRelationWords = []
 for eachCandidateRelationWord in candidateRelationTypeWords:
-    # 'NA' symbolizes that no location term could be found in the query. [] implies that all the tokens in the query are locations and no candidate relation word could be obtained.
+    # 'NA' symbolizes that no location term could be found in the query. [] implies that either all the tokens in the query are locations or
+    #  location term was found but no candidate relation word could be found before the location term.
     if (len(eachCandidateRelationWord) > 0 and eachCandidateRelationWord == 'NA'):
         # NA_Type_1: No location word found in query. Hence, no relation type word.
         nGramsCandidateRelationWords.append('NA_Type_1')
     elif len(eachCandidateRelationWord) == 0:
-        # NA_Type_2: All query tokens combined are location name.
+        # NA_Type_2: All query tokens combined are location name or location term was found but no candidate relation word could be found before the location term.
         nGramsCandidateRelationWords.append('NA_Type_2')
     else:
         nGramsCandidateRelationWords.append(findNgram(eachCandidateRelationWord))
@@ -179,24 +146,57 @@ for eachNGramCandidateRelation in nGramsCandidateRelationWords:
         tempGeoRelation.append('NA_Type_2')
     else:
         for eachInnerListItem in eachNGramCandidateRelation:
-            if eachInnerListItem in _listGeoRelationType:
-                tempGeoRelation.append(eachInnerListItem)
-##            else:
-##                # NA_Type_3 : No geo relation type in the query though it is has a location term
-##                tempGeoRelation.append('NA_Type_3')
+            if type(eachInnerListItem) == str:
+                if eachInnerListItem in _listGeoRelationType:
+                    tempGeoRelation.append(eachInnerListItem)
+            elif type(eachInnerListItem) == tuple:
+                if ' '.join(eachInnerListItem) in _listGeoRelationType:
+                    tempGeoRelation.append(' '.join(eachInnerListItem))
     geoRelationWord.append(tempGeoRelation)                
 
 # In case for a query we get multiple geo relation type words, retain the last one. Considering that the word just before Location name has a higher probability of defining geo relation.
 _geoRelationWord = []
 for m in range(len(geoRelationWord)):
     if not len(geoRelationWord[m]) == 0:
-            for n in range(len(geoRelationWord[m])):
-                if geoRelationWord[m][n] == 'NA_Type_1' or geoRelationWord[m][n] == 'NA_Type_2':
-                    _geoRelationWord.append('Not Found')
-                else:
-                    _geoRelationWord.append(geoRelationWord[m][-1])
+        if geoRelationWord[m][0] == 'NA_Type_1' or geoRelationWord[m][0] == 'NA_Type_2':
+            _geoRelationWord.append('Not Found')
+        else:
+            _geoRelationWord.append(geoRelationWord[m][-1])
     else:
         _geoRelationWord.append('Not Found')
-        
-        
 
+'''
+Finding the 'WHAT' in the query:
+Query sans 'location name' and 'geo relation type' word is the 'WHAT' term.
+Step 1: Tokenize the 'location name' and 'geo relation type'.
+Step 2: Combine the two tokens and make a set.
+Step 3: Take the set difference with the tokenized query and convert the resulting set to list.
+Step 4: Join the list items. Result would be the 'WHAT' term in the queries.
+'''
+whatTermInQuery = []
+tokensLocation = []
+tokensRelationType = []
+for elm in range(len(_predictedLocation)):
+    tempTokensLocation = []
+    tempTokensRelationType = []
+    if (not _predictedLocation[elm]  == 'NA' and not _geoRelationWord[elm] == 'Not Found'):
+        tempTokensLocation.append(word_tokenize(_predictedLocation[elm]))
+        tempTokensRelationType.append(word_tokenize(_geoRelationWord[elm]))
+    else:
+        tempTokensLocation.append([])
+        tempTokensRelationType.append([])
+    tokensLocation.append(tempTokensLocation)
+    tokensRelationType.append(tempTokensRelationType)
+
+# Unpack list
+_tokensLocation = []
+for eachInnerList1 in tokensLocation:
+	for each1 in eachInnerList1:
+		_tokensLocation.append(each1)        
+
+_tokensRelationType = []
+for eachInnerList2 in tokensRelationType:
+	for each2 in eachInnerList2:
+		_tokensRelationType.append(each2)        
+
+# Merge list of tokens and relation types
