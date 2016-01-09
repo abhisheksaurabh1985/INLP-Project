@@ -264,6 +264,17 @@ for _eachGeoCoordinate in _geoCoordinates:
         _geoCoordinatesRounded.append('')
 
 '''
+Determination of WHAT TYPE:
+If number of tokens in a query is equal to the number of tokens in the corresponding location, then query is of type MAP. 
+'''
+_predictedWhatType = []
+for countQuery in range(len(tokenizedQueries)):
+    if len(tokenizedQueries[countQuery]) == len(_tokensLocation[countQuery]):
+        _predictedWhatType.append('MAP')
+    else:
+        _predictedWhatType.append('Others')
+
+'''
 Generate output XML
 Following lists shall be used to generate the outout XML:
 listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predictedWhatType, _geoRelationWord, _predictedLocation, _geoCoordinates
@@ -271,7 +282,6 @@ listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predictedWhatTy
 
 # Dummy list of WHAT_TYPE to test if output is generated
 i= 100
-_predictedWhatType = []
 for j in range(i):
 	_predictedWhatType.append('WhatType')
 
