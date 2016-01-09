@@ -279,7 +279,6 @@ Generate output XML
 Following lists shall be used to generate the outout XML:
 listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predictedWhatType, _geoRelationWord, _predictedLocation, _geoCoordinates
 '''
-
 # Dummy list of WHAT_TYPE to test if output is generated
 i= 100
 for j in range(i):
