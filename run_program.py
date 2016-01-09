@@ -10,7 +10,7 @@ from nltk.stem.porter import PorterStemmer
 # import nltk.tokenize.punkt
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-filename = 'GC_Tr_100.xml'
+filename = 'GC_Test_Not_Solved_100.xml'
 dictQueries = xmlToDict(filename)
 ##print dictQueries.keys()
 
@@ -21,6 +21,11 @@ for keyOuter, valuesOuter in dictQueries.iteritems():
         if keyInner == 'QUERY':
             listQueries.append(valuesInner)
 
+# Iterate over the dictionary and save the query numbers in a list
+listQueryNumber = []
+for kOuter, valOuter in dictQueries.iteritems():
+        listQueryNumber.append(kOuter)
+            
 # Tokenize queries
 tokenizedQueries = []
 for eachQuery in listQueries:
@@ -239,17 +244,38 @@ for eachWhatTerm in whatTermInQueryIterTwo:
 '''
 Latitude and Longitude of a place. Python module Geopy has been used to get the coordinates of a location.
 '''
-##_geoCoordinates = []
-##for _everyPredictedLocation in _predictedLocation:
-##    if _everyPredictedLocation != 'NA':
-##        _geoCoordinates.append(getCoordinates(_everyPredictedLocation))
-##    else:
-##        _geoCoordinates.append('')
+_geoCoordinates = []
+for _everyPredictedLocation in _predictedLocation:
+    if _everyPredictedLocation != 'NA':
+        _geoCoordinates.append(getCoordinates(_everyPredictedLocation))
+    else:
+        _geoCoordinates.append('')
     
 # Round the geo coordinates to 2 digits and format it as '40.23,<space>-75.30'
-##for _eachGeoCoordinate in _geoCoordinates:
-##    if _eachGeoCoordinate != '':
-##        for eachCoordinate in _eachGeoCoordinate:
-##            eachCoordinate = round(eachCoordinate, 2)
-##    else:
-##        _eachGeoCoordinate = ''
+_geoCoordinatesRounded = []
+for _eachGeoCoordinate in _geoCoordinates:
+    if _eachGeoCoordinate != '':
+        tempEachGeoCoordinate = []
+        for eachCoordinate in _eachGeoCoordinate:
+            eachCoordinate = round(eachCoordinate, 2)
+            tempEachGeoCoordinate.append(eachCoordinate)
+        _geoCoordinatesRounded.append(tempEachGeoCoordinate)   
+    else:
+        _geoCoordinatesRounded.append('')
+
+'''
+Generate output XML
+Following lists shall be used to generate the outout XML:
+listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predictedWhatType, _geoRelationWord, _predictedLocation, _geoCoordinates
+'''
+
+# Dummy list of WHAT_TYPE to test if output is generated
+i= 100
+_predictedWhatType = []
+for j in range(i):
+	_predictedWhatType.append('WhatType')
+
+toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predictedWhatType, _geoRelationWord, _predictedLocation, _geoCoordinates)
+
+
+

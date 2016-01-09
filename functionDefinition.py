@@ -3,6 +3,10 @@ from xml.etree import ElementTree
 from collections import OrderedDict
 from geopy.geocoders import Nominatim
 
+import labo_classes as l
+import labo_functions as lf
+
+
 def xmlToDict(filename):
     tree = ElementTree.parse(filename)
     root = tree.getroot()
@@ -64,9 +68,18 @@ def getCoordinates (location):
     try:
         geolocator = Nominatim()
         location = geolocator.geocode(location)
-    except NoneType:
+        return location.longitude, location.latitude
+    except AttributeError:
         print 'NoneType: object has no attribute longitude'
-    return location.longitude, location.latitude
+        return '', ''
+        return None
 
-
+def toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predictedWhatType, _geoRelationWord, _predictedLocation, _geoCoordinates):
+    toSave = []
+##    print _geoRelationWord
+    for i in range (0,len(listQueries)):
+        coords = ','.join(str(_geoCoordinates[i]))
+##        print coords
+        toSave.append(l.Query(bytes(i), listQueryNumber[i], listQueries[i], isLocalQuery[i], _predictedWhatTerm[i], _predictedWhatType[i], _geoRelationWord[i], _predictedLocation[i],coords))
+    lf.saveQueriesToXml(toSave,'./output/finalOutput.xml')
 

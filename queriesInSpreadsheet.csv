@@ -1,101 +1,101 @@
 QUERYNO,QUERY,LOCAL,WHAT,WHAT-TYPE,GEO-RELATION,WHERE,LAT-LONG
-5004,7 day weather welwyn garden city,YES,7 day weather,Information,,welwyn garden city,"51.80, -0.20"
-5017,7 juniper path lanssale pa 19446,YES,,Map,,7 juniper path lanssale pa 19446,"40.23, -75.30"
-5023,7 news colorado,YES,7 news,Information,,colorado,"38.99, -105.54"
-7057,ABC NEWS CHICAGO,YES,ABC NEWS,Information,,CHICAGO,"41.90, -87.63"
-7317,ABERDEEN AIRPORT,NO,,,,,
-7412,ABERYSTWYTH,YES,,Map,,ABERYSTWYTH,"52.41, -4.08"
-12155,Adirondack Mountains,YES,,Map,,Adirondack Mountains,"44.00, -74.00"
-12157,Adirondack Park,NO,,,,,
-20533,Alabama Schools,YES,Schools,Yellow page,,Alabama,"32.74, -86.84"
-20543,Alabama Shakespeare Festival,YES,Shakespeare Festival,Information,,Alabama,"32.74, -86.84"
-20842,Alameda Superior Court,NO,,,,,
-20901,Alamogordo Daily News,NO,,,,,
-45193,articles written in 2006 on taxation of electronic commerce,NO,,,,,
-51203,Attitudes to Education in young people,NO,,,,,
-76684,bellevue fireplace store,YES,fireplace store,Yellow page,,bellevue,"47.61, -122.20"
-77378,bendigo cinemas,YES,cinemas,Yellow page,,Bendigo,"-36.75, 144.28"
-90490,bluefield regional medical center,YES,regional medical center,Yellow page,,bluefield,"37.25, -81.23"
-90507,BLUEFISH,YES,,Map,,BLUEFISH,"66.40, -128.18"
-90941,BMW Canada,YES,BMW,Yellow page,,Canada,"62.83, -95.91"
-92430,Bodrum Hotels,YES,Hotels,Yellow page,,Bodrum,"37.03, 27.43"
-94622,bookshop in singapore,YES,bookshop,Yellow page,IN,singapore,"1.32, 103.82"
-99387,breast cancer care,NO,,,,,
-106754,bumper to bumper auto parts shreveport la,YES,bumper to bumper auto parts shreveport la,Yellow page,,shreveport la,"32.47, -93.77"
-107976,bus trips from columbia,YES,bus trips,Information,FROM,columbia,"34.00, -81.03"
-111752,cabins to rent at lake tahoe,YES,cabins to rent,Yellow page,AT,lake tahoe,"39.08, -120.02"
-119335,campbell river bc,YES,,Map,,campbell river bc,"49.98, -125.22"
-124435,cannon mountain,YES,,Map,,cannon mountain,"44.15, -71.69"
-131465,carpathian mountains,YES,,Map,,carpathian mountains,"48.75, 23.75"
-131516,carpet cleaners in fort walton beach fl florida,YES,carpet cleaners,Yellow page,IN,fort walton beach fl florida,"30.40, -86.60"
-156961,christie lake,YES,,Map,,christie lake,"56.91, -96.93"
-164302,Clearwater Beach Hostels,YES,Hostels,Yellow page,,Clearwater Beach,"27.97, -82.82"
-172155,Columbia clothing,NO,,,,,
-172391,Columbia River Gorge,YES,,Map,,Columbia River Gorge,"45.65, -121.90"
-180534,convert kilometers to miles,NO,,,,,
-195509,cyprus Italian food,YES,Italian food,Yellow page,,cyprus,"35.05, 33.29"
-211301,dictionary from english to spanish,NO,,,,,
-212836,dinosaur national monument,NO,,,,,
-214012,Discount Airline Tickets To Brazil,YES,Discount Airline Tickets,Information,TO,Brazil,"-10.80, -52.97"
-217859,doctors hospital augusta ga,YES,doctors hospital,Yellow page,,augusta ga,"33.46, -81.99"
-218097,dodge park in Wisconsin,NO,,Yellow page,IN,Wisconsin,"44.63 , -89.73"
-222904,Drain Repairing Mountain View CA,YES,Drain Repairing,Yellow page,,Mountain View CA,"37.40, -122.08"
-225039,dubai police,YES,police,Yellow page,,dubai,"25.00, 55.33"
-228325,EARN EXTRA INCOME IN SINGAPORE,YES,EARN EXTRA INCOME,Information,IN,SINGAPORE,"1.32, 103.82"
-228553,EAST BAY,YES,,Map,,East Bay,"29.50, -94.68"
-264285,flight to key west florida,YES,flight,Information,TO,key west florida,"24.55, -81.77"
-267670,florida tax free shopping,YES,tax free shopping,Yellow page,,florida,"28.38, -81.75"
-273102,fort pulaski national monument,YES,,Map,,fort pulaski national monument,"32.02, -80.89"
-281926,free wav to mp3 converter,NO,,,,,
-285765,fun things to do near maldon,YES,fun things to do,Information,NEAR,maldon,"51.73, 0.67"
-288221,galleria cinemas,YES,cinemas,Yellow page,,galleria,"32.93, -96.81"
-289228,games to play at parties,NO,,,,,
-298780,glen canyon,YES,glen canyon,Map,,glen canyon,"37.16, -110.83"
-325030,herald and news klamath falls,YES,herald and news,Information,,klamath falls,"42.23, -121.76"
-347951,HOUSE TO BUY IN MISSISSAUGA,YES,HOUSE TO BUY,Yellow page,IN,MISSISSAUGA,"43.58, -79.61"
-350738,how to invest in stock,NO,,,,,
-379021,jameson inn crestview fl,YES,jameson inn,Yellow page,,crestview fl,"30.76, -86.57"
-413466,lakeside mall in michigan,YES,lakeside mall,Yellow page,IN,michigan,"44.87, -85.73"
-419864,law blog in singapore,YES,law blog,Information,IN,singapore,"1.32, 103.82"
-429832,List of Restaurants in Ottawa,YES,List of Restaurants,Yellow page,IN,Ottawa,"45.42, -75.70"
-443166,macdougall dr in atlanta,YES,,Map,,macdougall dr in atlanta,"33.76, -84.39"
-465445,men shoes,NO,,,,,
-476806,minibus trips in cyprus,YES,minibus trips,Information,IN,cyprus,"35.05, 33.29"
-500600,nansemond county virginia,YES,,Map,,nansemond county virginia,"36.86, -76.51"
-508092,New Car Dealer Albuquerque,YES,New Car Dealer,Yellow page,,Albuquerque,"35.08, -106.65"
-513656,newbury weekly news,YES,weekly news,Information,,newbury,"51.39, -1.32"
-515842,niagara day tours from toronto,YES,niagara day tours,Information,FROM,toronto,"43.65 , -79.38"
-522071,North Olmsted apartments,YES,apartments,Yellow page,,North Olmsted,"41.42, -81.91"
-523187,NORTHWEST AIRLINES,NO,,,,,
-545455,ozark city schools,YES,schools,Yellow page,,ozark city,"31.45, -85.64"
-545994,pacific coffee,NO,,,,,
-548229,palm beach post times,YES,post times,Information,,palm beach,"26.64, -80.43"
-550804,paradise valley community college,NO,,,,,
-559785,Permission Letter for child to be on television,NO,,,,,
-568343,pine view high school,YES,high school,Yellow page,,pine view,"45.40, -75.59"
-573444,plumbers in manhattan ny new york,YES,plumbers,Yellow page,IN,manhattan ny new york,"40.40, -74.00"
-579251,porter central rd  ohio,YES,,Map,,porter central rd  ohio,"40.41, -82.70"
-581210,poultry farming training in the limpopo province,YES,poultry farming training,Yellow page,IN,the limpopo province,"-23.65, 29.00"
-584581,Price To Sales Ratio,NO,,,,,
-586626,products to import from cuba,YES,products to import,Information,FROM,cuba,"22.10, -79.01"
-589183,province of british columbia,YES,,Map,,province of british columbia,"54.62, -124.90"
-594250,Questionnaires on physical activity in South Africa,YES,Questionnaires on physical activity,Information,IN,South Africa,"-29.04, 25.06"
-594256,Questions To Ask At An Interview,NO,,,,,
-597458,rainforest cafe chicago,YES,rainforest cafe,Yellow page,,chicago,"41.90, -87.63"
-642987,seattle family law attorney,YES,family law attorney,Yellow page,,seattle,"47.59, -122.33"
-654871,shoreham weather,YES,weather,Information,,shoreham,"51.32, 0.19"
-654878,shores of panama,YES,shores,Map,OF,panama,"8.59, -80.41"
-655426,shreveport airport,NO,,,,,
-656171,siena apartments,YES,apartments,Yellow page,,siena,"43.26, 11.24"
-665018,SOCIETY CHANGES FROM 1915 TO 2005,NO,,,,,
-713155,things to do in charlotte north carolina,YES,things to do,Information,IN,charlotte north carolina,"35.22, -80.84"
-720279,top rated fitness gyms in washington dc,YES,top rated fitness gyms,Yellow page,IN,washington dc,"47.41, -120.58"
-727275,travel tips to the northwest usa,YES,travel tips,Information,NORTH_WEST_TO,usa,"33.52, 131.36"
-738740,United States Embassy,NO,,,,,
-754698,vice president of trust at Frontier Bank in Everett Washington,YES,vice president of trust at Frontier Bank,Information,,Everett Washington,"47.97, -122.20"
-757957,villas to rent in south west majorca,YES,villas to rent,Yellow page,SOUTH_WEST_OF,majorca,"39.58, 3.00"
-778019,wet place,NO,wet place,,,,
-778424,whalen furniture,NO,,,,,
-779324,which airport is near to st julians in malta,YES,which airport is,Yellow page,NEAR,st julians in malta,"35.93, 14.38"
-779442,whirlpool dishwashers,NO,,,,,
-788702,woody allen,NO,,,,,
+886,145 king of prussia rd,,,,,,
+3687,3d baby ultrasound imaging in west covina,,,,,,
+5897,a passage to India,,,,,,
+7702,about australia,,,,,,
+9049,accommodation near fort william,,,,,,
+9228,accomodation south africa,,,,,,
+12487,adopting from china,,,,,,
+12609,adoption san antonio,,,,,,
+13696,adventure alaska travel,,,,,,
+14457,aeroporto milano linate,,,,,,
+16203,agencia de carros,,,,,,
+20315,alabama florist,,,,,,
+21413,alaska homer in rental vacation,,,,,,
+25266,allen tate realtors,,,,,,
+26020,aloha stickers,,,,,,
+28158,ambassador suite hotel in atlanta,,,,,,
+31131,anaheim disneyland,,,,,,
+33972,ankara,,,,,,
+34234,anna maria island hostels,,,,,,
+35648,antigua ,,,,,,
+37806,apartments in ottawa,,,,,,
+38004,apartments to rent in cyprus,,,,,,
+41768,arizona administrative code,,,,,,
+42649,arizona notary public,,,,,,
+43029,arizona used car lemon law,,,,,,
+45422,aruba accommodations,,,,,,
+49990,atlanta medical,,,,,,
+50260,atlanta trademark lawyer,,,,,,
+53159,austin housing authority,,,,,,
+54345,auto insurance canada,,,,,,
+56120,aventura homes,,,,,,
+58790,azerbaijan,,,,,,
+59582,baby cribs,,,,,,
+60854,bad car credit idaho in loan,,,,,,
+63817,baltimore zoo,,,,,,
+64814,banda panda,,,,,,
+65066,banes,,,,,,
+66112,bank west of nevada,,,,,,
+67215,barbados radio station,,,,,,
+69511,basketball court in petaling jaya,,,,,,
+71802,bbc ,,,,,,
+72637,beach from icon laguna talan,,,,,,
+73769,beauty lexington product,,,,,,
+76487,bellaire high school,,,,,,
+77643,benidorm nightlife,,,,,,
+79720,best resorts in mexico,,,,,,
+82517,big fireworks,,,,,,
+85120,bing bong,,,,,,
+86475,bismarck state college,,,,,,
+87272,black hills condos,,,,,,
+89490,blossom music center,,,,,,
+92227,boca raton real estate agents,,,,,,
+95478,bose car stereo,,,,,,
+96283,boulevard drive in,,,,,,
+97078,boy bastos,,,,,,
+98565,brasil telecom ,,,,,,
+101575,britannia,,,,,,
+102787,bronx botanical garden,,,,,,
+103120,brooksville fl,,,,,,
+105371,buenos aires,,,,,,
+110524,buy vicodin without a prescription,,,,,,
+111803,cable modem,,,,,,
+112664,caernarfon,,,,,,
+113501,calabria chat,,,,,,
+114698,california board of equalization,,,,,,
+115580,california health insurance providers,,,,,,
+116205,california mortgage home loans,,,,,,
+118214,cambridge,,,,,,
+121510,canada job bank,,,,,,
+122508,canadian gardener,,,,,,
+123926,candice michelle in playboy,,,,,,
+125692,cape may fishing,,,,,,
+126929,car dealer in usa,,,,,,
+127633,car insurance minnesota quote,,,,,,
+128323,car rental las vegas nv,,,,,,
+129204,carcinoid tumor,,,,,,
+130150,caribbean joe,,,,,,
+131737,carrefour jeunesse emploi,,,,,,
+132611,carte michelin,,,,,,
+134857,casoli,,,,,,
+135477,casual wedding dresses,,,,,,
+136738,caverns in alabama,,,,,,
+139092,cellular phone numbers,,,,,,
+140753,cercanias,,,,,,
+145921,cheap airfares within South america,,,,,,
+146609,cheap flight hong kong,,,,,,
+147301,cheap flights to rome,,,,,,
+148008,cheap house for sale in france,,,,,,
+149643,chelan washington,,,,,,
+151603,chicago classifieds,,,,,,
+152605,chicago tribune,,,,,,
+156375,christening gowns,,,,,,
+158460,cigna dental insurance,,,,,,
+159462,cinque terre sicilia,,,,,,
+160518,city east of utah lake,,,,,,
+160651,city national bank of west virginia,,,,,,
+161546,city of loveland,,,,,,
+163369,clark state community college,,,,,,
+165545,clonmel,,,,,,
+166135,club sandy,,,,,,
