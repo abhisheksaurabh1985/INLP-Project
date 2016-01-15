@@ -2,7 +2,9 @@ execfile('./functionDefinition.py')
 execfile('./dbPediaInterface.py')
 
 # Third party libraries
+
 import nltk
+
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
@@ -31,11 +33,14 @@ tokenizedQueries = []
 for eachQuery in listQueries:
     tokenizedQueries.append(word_tokenize(eachQuery.lower()))
 
+
+
 # POS tagging of queries
 taggedTokenizedQueries = []
 for eachTokenizedQuery in tokenizedQueries:
-    taggedTokenizedQueries.append(pos_tag(eachTokenizedQuery))
-    
+  taggedTokenizedQueries.append(pos_tag(eachTokenizedQuery))
+
+
 # Search candidate words
 candidateLocationsFirstIter = []
 for eachTaggedQuery in taggedTokenizedQueries:
@@ -268,11 +273,16 @@ Determination of WHAT TYPE:
 If number of tokens in a query is equal to the number of tokens in the corresponding location, then query is of type MAP. 
 '''
 _predictedWhatType = []
+yellowTerms = getYellowTerms('./terms')
+
 for countQuery in range(len(tokenizedQueries)):
     if len(tokenizedQueries[countQuery]) == len(_tokensLocation[countQuery]):
         _predictedWhatType.append('MAP')
+    elif checkTokenYellow(tokenizedQueries[countQuery],yellowTerms):
+        _predictedWhatType.append('Yellow page')
     else:
-        _predictedWhatType.append('Others')
+        _predictedWhatType.append('Information')
+
 
 '''
 Generate output XML

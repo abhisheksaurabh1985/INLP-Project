@@ -1,7 +1,18 @@
 from __future__ import division
-from xml.etree import ElementTree
-from collections import OrderedDict
-from geopy.geocoders import Nominatim
+import sys
+package_list = ["xml.etree","collections","geopy"]
+i=0
+try:
+    from xml.etree import ElementTree
+    i+=1
+    from collections import OrderedDict
+    i+=1
+    from geopy.geocoders import Nominatim
+except ImportError:
+    print("\nERROR: Module " + package_list[i] + " is not installed")
+    print("INFO: Use \"pip install "+package_list[i]+"\" to install it and try to run the program again\n")
+    sys.exit(1)
+
 
 import labo_classes as l
 import labo_functions as lf
@@ -83,3 +94,16 @@ def toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predi
         toSave.append(l.Query(bytes(i), listQueryNumber[i], listQueries[i], isLocalQuery[i], _predictedWhatTerm[i], _predictedWhatType[i], _geoRelationWord[i], _predictedLocation[i],coords))
     lf.saveQueriesToXml(toSave,'./output/finalOutput.xml')
 
+
+def getYellowTerms (file):
+    yellowterms = []
+    with open(file,"r") as file:
+        for line in file:
+            yellowterms.append(line.strip("\n"))
+    return yellowterms
+
+def checkTokenYellow(tokenizedQuery, yellowterms):
+    for word in tokenizedQuery:
+        if word in yellowterms:
+            return True
+    return False
