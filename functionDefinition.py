@@ -83,8 +83,7 @@ def getCoordinates (location):
         return location.longitude, location.latitude
     except AttributeError:
         print 'NoneType: object has no attribute longitude'
-        return '', ''
-        return None
+        return 0, 0
 
 def toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predictedWhatType, _geoRelationWord, _predictedLocation, _geoCoordinates):
     toSave = []

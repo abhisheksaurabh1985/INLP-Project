@@ -148,11 +148,14 @@ If number of tokens in a query is equal to the number of tokens in the correspon
 '''
 _predictedWhatType = []
 yellowTerms = getYellowTerms('./terms')
+stemmer = nltk.stem.porter.PorterStemmer()
+
 
 for what in predictedWhat:
+    what_stem = stemmer.stem(what)
     if not what:
         _predictedWhatType.append('MAP')
-    elif checkTokenYellow(what,yellowTerms):
+    elif checkTokenYellow(what_stem,yellowTerms):
         _predictedWhatType.append('Yellow page')
     else:
         _predictedWhatType.append('Information')
