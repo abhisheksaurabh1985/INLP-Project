@@ -8,7 +8,7 @@ import nltk
 from nltk.tag import pos_tag
 import scorer
 
-
+print 'Parsing XML File'
 filename = 'GC_Tr_100.xml'
 dictQueries = xmlToDict(filename)
 
@@ -24,7 +24,9 @@ listQueryNumber = []
 for kOuter, valOuter in dictQueries.iteritems():
         listQueryNumber.append(kOuter)
 
+print 'Tokenizing Queries'
 tokenizedQueries = [nltk.word_tokenize(eachQuery.lower()) for eachQuery in listQueries]
+print 'Applying POS-TAGGER'
 taggedTokenizedQueries = [pos_tag(eachTokenizedQuery) for eachTokenizedQuery in tokenizedQueries]
 solution = []
 predictedWhere = []
@@ -48,6 +50,7 @@ for eachItem in predictedWhere:
 '''
 Find if the query is local. If a location term is found, then query is said to be local.
 '''
+print 'Querying DBpedia. . .'
 # Search nGrams in dbPedia for match
 predictedLocation = []
 for eachListItem in nGramCandidateLocation:
@@ -82,6 +85,13 @@ for i in range(len(_predictedLocation)):
         predictedWhat[i] = [tmp.strip(loc)]
     if (_predictedLocation[i]!= 'NA'):
         predictedWhere[i] = ""
+    for j in range(len(predictedWhat[i])):
+        if tmp[j] in coordinates:
+            indx = coordinates.index(tmp[j])
+            predictedWhat[i] = predictedWhat[0:j]
+            predictedGeo[i] = geocords[indx]
+
+
 # If query contains a location term, then refer the query as a local query.
 isLocalQuery = []
 for _PredictedLocation in _predictedLocation:
@@ -95,42 +105,7 @@ for _PredictedLocation in _predictedLocation:
 #with open('./inputFiles/geoRelationTypeDictionary', 'r') as f:
 #    listGeoRelationType = f.read().split()
 
-'''_listGeoRelationType = []
-for eachGeoRelation in listGeoRelationType:
-    if ('_' in eachGeoRelation):
-        _listGeoRelationType.append(eachGeoRelation.replace("_", " "))
-    else:
-        _listGeoRelationType.append(eachGeoRelation)
 
-# Match candidate relation words with the dictionary of relation words
-geoRelationWord = []
-for eachNGramCandidateRelation in nGramsCandidateRelationWords:
-    tempGeoRelation = []
-    if eachNGramCandidateRelation == 'NA_Type_1':
-        tempGeoRelation.append('NA_Type_1')
-    elif eachNGramCandidateRelation == 'NA_Type_2':    
-        tempGeoRelation.append('NA_Type_2')
-    else:
-        for eachInnerListItem in eachNGramCandidateRelation:
-            if type(eachInnerListItem) == str:
-                if eachInnerListItem in _listGeoRelationType:
-                    tempGeoRelation.append(eachInnerListItem)
-            elif type(eachInnerListItem) == tuple:
-                if ' '.join(eachInnerListItem) in _listGeoRelationType:
-                    tempGeoRelation.append(' '.join(eachInnerListItem))
-    geoRelationWord.append(tempGeoRelation)                
-
-# In case for a query we get multiple geo relation type words, retain the last one. Considering that the word just before Location name has a higher probability of defining geo relation.
-_geoRelationWord = []
-for m in range(len(geoRelationWord)):
-    if not len(geoRelationWord[m]) == 0:
-        if geoRelationWord[m][0] == 'NA_Type_1' or geoRelationWord[m][0] == 'NA_Type_2':
-            _geoRelationWord.append('Not Found')
-        else:
-            _geoRelationWord.append(geoRelationWord[m][-1])
-    else:
-        _geoRelationWord.append('Not Found')
-'''
 
 '''
 Latitude and Longitude of a place. Python module Geopy has been used to get the coordinates of a location.
@@ -148,14 +123,12 @@ If number of tokens in a query is equal to the number of tokens in the correspon
 '''
 _predictedWhatType = []
 yellowTerms = getYellowTerms('./terms')
-stemmer = nltk.stem.porter.PorterStemmer()
 
 
 for what in predictedWhat:
-    what_stem = stemmer.stem(what)
     if not what:
         _predictedWhatType.append('MAP')
-    elif checkTokenYellow(what_stem,yellowTerms):
+    elif checkTokenYellow(what,yellowTerms):
         _predictedWhatType.append('Yellow page')
     else:
         _predictedWhatType.append('Information')

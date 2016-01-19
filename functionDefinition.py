@@ -117,8 +117,10 @@ def getYellowTerms (file):
     return yellowterms
 
 def checkTokenYellow(tokenizedQuery, yellowterms):
+    stemmer = nltk.stem.porter.PorterStemmer()
+
     for word in tokenizedQuery:
-        if word in yellowterms:
+        if stemmer.stem(word) in yellowterms:
             return True
     return False
 
@@ -157,3 +159,7 @@ def getGeoTriplet(result):
             what = what[0:-1]
 
     return where, geo, what;
+
+
+coordinates = ['north','south','west','east','northwest','northeast','southwest','southeast']
+geocords = ['NORTH_OF','SOUTH_OF','WEST_OF','EAST_OF','NORTH_WEST_OF','NOTRH_EAST_OF','SOUTH_WEST_OF','SOUTH_EAST_OF']
