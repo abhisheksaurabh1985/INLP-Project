@@ -1,6 +1,6 @@
 from __future__ import division
 import sys
-package_list = ["xml.etree","collections","geopy"]
+package_list = ["xml.etree","collections","geopy","nltk"]
 i=0
 try:
     from xml.etree import ElementTree
@@ -8,6 +8,7 @@ try:
     from collections import OrderedDict
     i+=1
     from geopy.geocoders import Nominatim
+    import nltk
 except ImportError:
     print("\nERROR: Module " + package_list[i] + " is not installed")
     print("INFO: Use \"pip install "+package_list[i]+"\" to install it and try to run the program again\n")
@@ -87,13 +88,17 @@ def getCoordinates (location):
 
 def toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predictedWhatType, _geoRelationWord, _predictedLocation, _geoCoordinates):
     toSave = []
-##    print _geoRelationWord
     for i in range (0,len(listQueries)):
-        coords = ','.join(str(_geoCoordinates[i]))
-##        print coords
-        toSave.append(l.Query(bytes(i), listQueryNumber[i], listQueries[i], isLocalQuery[i], _predictedWhatTerm[i], _predictedWhatType[i], _geoRelationWord[i], _predictedLocation[i],coords))
-    lf.saveQueriesToXml(toSave,'./output/finalOutput.xml')
+        if not _geoCoordinates[i]:
+            lat = ""; lon = ""
+        else:
+            m,n = _geoCoordinates[i]
+            lat = "%.2f" % m + ", %.2f" % n
 
+        query = l.Query(bytes(listQueryNumber[i]), listQueries[i], isLocalQuery[i], _predictedWhatTerm[i], _predictedWhatType[i], _geoRelationWord[i], _predictedLocation[i],bytes(lat))
+        toSave.append(query)
+    lf.saveQueriesToXml(toSave,'./output/finalOutput.xml')
+#seems to be that listquery number does not have integers, it has lists
 
 def getYellowTerms (file):
     yellowterms = []
@@ -107,3 +112,39 @@ def checkTokenYellow(tokenizedQuery, yellowterms):
         if word in yellowterms:
             return True
     return False
+
+def filterGeoRelation(query_tokens):
+
+	grammar = r"""
+				WHERE: 	<IN.*>+{<DT>?<NN.*>+<.*>*}
+				WHERE: 	<IN.*>+{<JJ.*>*<NN.*>+<.*>*}
+				WHAT:	{<.*>+}<IN>+<WHERE>
+				GEOR:	<WHAT>{<IN>+}<WHERE>
+				GEOR:   {<IN>+}<LOC>
+				"""
+
+	cp = nltk.RegexpParser(grammar)
+	res = cp.parse(query_tokens)
+	return res
+
+def getGeoTriplet(result):
+    where = []
+    what = []
+    geo = []
+    cards = ['east','west','north','south','northeast','northwest','southeast','southwest']
+    for n in result:
+        if isinstance(n, nltk.tree.Tree):
+            nn = [''.join(w) for (w,p) in n.leaves()]
+            if 'WHERE' in n.label():
+                where.extend(nn)
+            if 'WHAT' in n.label():
+                what.extend(nn)
+            if 'GEO' in n.label():
+                geo.extend(nn)
+    if what:
+        if what[-1] in cards:
+            #[what[-1]].extend(geo)
+            geo = [what[-1]+' '+' '.join(geo)]
+            what = what[0:-1]
+
+    return where, geo, what;
