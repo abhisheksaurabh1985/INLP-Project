@@ -76,7 +76,7 @@ for eachPredictedLocation in predictedLocation:
         _predictedLocation.append('NA')
 
 for i in range(len(_predictedLocation)):
-    if (not predictedWhat[i]) or (_predictedLocation[i]!= 'NA'):
+    if (predictedWhat[i]) or (_predictedLocation[i] != 'NA'):
         tmp = nltk.word_tokenize(_predictedLocation[i])
         pos = predictedWhere[i].index(tmp[0])
         predictedWhat[i] = predictedWhere[i][0:pos]
