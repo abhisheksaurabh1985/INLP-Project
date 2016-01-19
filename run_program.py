@@ -9,7 +9,7 @@ from nltk.tag import pos_tag
 import scorer
 
 print 'Parsing XML File'
-filename = 'GC_Test_Not_Solved_100.xml'
+filename = 'GC_Tr_100_small.xml'
 dictQueries = xmlToDict(filename)
 
 # Iterate over the dictionary and save the queries in a list
@@ -86,20 +86,18 @@ for i in range(len(_predictedLocation)):
         #loc = ' '.join(predictedLocation[i])
         #predictedWhat[i] = [tmp.strip(loc)]
         tmp = nltk.word_tokenize(_predictedLocation[i])
-        pos = predictedWhere[i].index(tmp[0])
-        predictedWhat[i] = predictedWhere[i][0:pos]
-        _predictedLocation[i] = ' '.join(predictedWhere[i][pos:])
-
-
-
+        if tmp[0] in predictedWhere[i]:
+            pos = predictedWhere[i].index(tmp[0])
+            predictedWhat[i] = predictedWhere[i][0:pos]
+            _predictedLocation[i] = ' '.join(predictedWhere[i][pos:])
 
     if (_predictedLocation[i]!= 'NA'):
         predictedWhere[i] = ""
-    for j in range(len(predictedWhat[i])):
-        if tmp[j] in coordinates:
-            indx = coordinates.index(tmp[j])
-            predictedWhat[i] = predictedWhat[i][0:j]
-            predictedGeo[i] = geocords[indx]
+    #for j in range(len(predictedWhat[i])):
+    #   if tmp[j] in coordinates:
+    #      indx = coordinates.index(tmp[j])
+    #     predictedWhat[i] = predictedWhat[i][0:j]
+    #    predictedGeo[i] = geocords[indx]
 
 
 # If query contains a location term, then refer the query as a local query.
