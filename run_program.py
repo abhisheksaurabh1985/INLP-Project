@@ -67,7 +67,7 @@ for eachListItem in nGramCandidateLocation:
 
 # If for a query, more than two locations are predicted, returned the one with maximum number of tokens.
 _predictedLocation = []
-for eachPredictedLocation in predictedLocation: #if what empty meter en what el resto
+for eachPredictedLocation in predictedLocation:
     if len(eachPredictedLocation) == 1:
         _predictedLocation.append(eachPredictedLocation[0])
     elif len(eachPredictedLocation) > 1:
@@ -77,7 +77,8 @@ for eachPredictedLocation in predictedLocation: #if what empty meter en what el 
 
 for i in range(len(predictedLocation)):
     if not predictedWhat[i]:
-        pos = predictedWhere[i].index(_predictedLocation[i])
+        tmp = nltk.word_tokenize(_predictedLocation[i])
+        pos = predictedWhere[i].index(tmp[0])
         predictedWhat[i] = predictedWhere[i][0:pos]
         _predictedLocation[i] = ' '.join(predictedWhere[i][pos:])
 
