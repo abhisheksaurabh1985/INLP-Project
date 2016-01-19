@@ -141,20 +141,8 @@ for _everyPredictedLocation in _predictedLocation:
         _geoCoordinates.append(getCoordinates(_everyPredictedLocation))
     else:
         _geoCoordinates.append('')
-'''
-# Round the geo coordinates to 2 digits and format it as '40.23,<space>-75.30'
-_geoCoordinatesRounded = []
-for _eachGeoCoordinate in _geoCoordinates:
-    if _eachGeoCoordinate != '':
-        tempEachGeoCoordinate = []
-        for eachCoordinate in _eachGeoCoordinate:
-            eachCoordinate = round(eachCoordinate, 2)
-            tempEachGeoCoordinate.append(eachCoordinate)
-        _geoCoordinatesRounded.append(tempEachGeoCoordinate)   
-    else:
-        _geoCoordinatesRounded.append('')
 
-''''''
+'''
 Determination of WHAT TYPE:
 If number of tokens in a query is equal to the number of tokens in the corresponding location, then query is of type MAP. 
 '''
