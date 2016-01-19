@@ -73,7 +73,7 @@ for eachPredictedLocation in predictedLocation:
     elif len(eachPredictedLocation) > 1:
         _predictedLocation.append(eachPredictedLocation[-1])
     elif len(eachPredictedLocation) == 0:
-        _predictedLocation.append('NA')
+        _predictedLocation.append('')
 
 for i in range(len(predictedLocation)):
     if not predictedWhat[i]:
@@ -85,7 +85,7 @@ for i in range(len(predictedLocation)):
 # If query contains a location term, then refer the query as a local query.
 isLocalQuery = []
 for _PredictedLocation in _predictedLocation:
-    if _PredictedLocation != 'NA':
+    if _PredictedLocation != '':
         isLocalQuery.append('YES')
     else:
         isLocalQuery.append('NO')
