@@ -73,19 +73,20 @@ for eachPredictedLocation in predictedLocation:
     elif len(eachPredictedLocation) > 1:
         _predictedLocation.append(eachPredictedLocation[-1])
     elif len(eachPredictedLocation) == 0:
-        _predictedLocation.append('')
+        _predictedLocation.append('NA')
 
-for i in range(len(predictedLocation)):
-    if not predictedWhat[i]:
+for i in range(len(_predictedLocation)):
+    if (not predictedWhat[i]) or (_predictedLocation[i]!= 'NA'):
         tmp = nltk.word_tokenize(_predictedLocation[i])
         pos = predictedWhere[i].index(tmp[0])
         predictedWhat[i] = predictedWhere[i][0:pos]
         _predictedLocation[i] = ' '.join(predictedWhere[i][pos:])
-
+    if (_predictedLocation[i]!= 'NA'):
+        predictedWhere[i] = ""
 # If query contains a location term, then refer the query as a local query.
 isLocalQuery = []
 for _PredictedLocation in _predictedLocation:
-    if _PredictedLocation != '':
+    if _PredictedLocation != 'NA':
         isLocalQuery.append('YES')
     else:
         isLocalQuery.append('NO')
