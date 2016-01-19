@@ -9,7 +9,7 @@ from nltk.tag import pos_tag
 import scorer
 
 print 'Parsing XML File'
-filename = 'GC_Tr_100.xml'
+filename = 'GC_Test_Not_Solved_100.xml'
 dictQueries = xmlToDict(filename)
 
 # Iterate over the dictionary and save the queries in a list
@@ -24,9 +24,9 @@ listQueryNumber = []
 for kOuter, valOuter in dictQueries.iteritems():
         listQueryNumber.append(kOuter)
 
-print 'Tokenizing Queries'
+print 'Tokenizing Queries  ..........1/5'
 tokenizedQueries = [nltk.word_tokenize(eachQuery.lower()) for eachQuery in listQueries]
-print 'Applying POS-TAGGER'
+print 'Applying POS-TAGGER ..........2/5 '
 taggedTokenizedQueries = [pos_tag(eachTokenizedQuery) for eachTokenizedQuery in tokenizedQueries]
 solution = []
 predictedWhere = []
@@ -50,10 +50,12 @@ for eachItem in predictedWhere:
 '''
 Find if the query is local. If a location term is found, then query is said to be local.
 '''
-print 'Querying DBpedia. . .'
+i=0
+print 'Querying DBpedia    ..........3/5 '
 # Search nGrams in dbPedia for match
 predictedLocation = []
 for eachListItem in nGramCandidateLocation:
+    print i
     tempPredictedLocation = []
     for each in eachListItem:
         if len(each) > 0:
@@ -67,7 +69,7 @@ for eachListItem in nGramCandidateLocation:
         else:
             tempPredictedLocation.append([])
     predictedLocation.append(tempPredictedLocation)
-
+    i+=1
 # If for a query, more than two locations are predicted, returned the one with maximum number of tokens.
 _predictedLocation = []
 for eachPredictedLocation in predictedLocation:
@@ -80,15 +82,23 @@ for eachPredictedLocation in predictedLocation:
 
 for i in range(len(_predictedLocation)):
     if (predictedWhat[i]) or (_predictedLocation[i] != 'NA'):
-        tmp  =' '.join(predictedWhere[i])
-        loc = ' '.join(predictedLocation[i])
-        predictedWhat[i] = [tmp.strip(loc)]
+        #tmp  =' '.join(predictedWhere[i])
+        #loc = ' '.join(predictedLocation[i])
+        #predictedWhat[i] = [tmp.strip(loc)]
+        tmp = nltk.word_tokenize(_predictedLocation[i])
+        pos = predictedWhere[i].index(tmp[0])
+        predictedWhat[i] = predictedWhere[i][0:pos]
+        _predictedLocation[i] = ' '.join(predictedWhere[i][pos:])
+
+
+
+
     if (_predictedLocation[i]!= 'NA'):
         predictedWhere[i] = ""
     for j in range(len(predictedWhat[i])):
         if tmp[j] in coordinates:
             indx = coordinates.index(tmp[j])
-            predictedWhat[i] = predictedWhat[0:j]
+            predictedWhat[i] = predictedWhat[i][0:j]
             predictedGeo[i] = geocords[indx]
 
 
@@ -133,6 +143,7 @@ for what in predictedWhat:
     else:
         _predictedWhatType.append('Information')
 
+print 'Generating XML ..........4/5'
 
 '''
 Generate output XML
@@ -155,7 +166,8 @@ for i in range(len(_predictedLocation)):
 
 
 toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhat, _predictedWhatType, _predictedGeo , _predictedLocation, _geoCoordinates)
+print 'DONE!'
 
-precission, recall, fi = scorer.score("output/finalOutput.xml","GC_Tr_100.xml")
+execfile('./scorer.py')
 
-print precission,recall,fi
+
