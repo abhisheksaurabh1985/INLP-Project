@@ -105,6 +105,16 @@ def getYellowTerms (file):
     with open(file,"r") as file:
         for line in file:
             yellowterms.append(line.strip("\n"))
+
+        yellow_toks = []
+        for elem in yellowterms:
+            yellow_toks.extend(nltk.word_tokenize(elem))
+
+        yellow_toks_valid = [elem.lower() for elem in yellow_toks if len(elem) > 2]
+        stemmer = nltk.stem.porter.PorterStemmer()
+        yellow_stems = [stemmer.stem(elem) for elem in yellow_toks_valid]
+        # Only keep unique values
+        yellowterms = set(yellow_stems)
     return yellowterms
 
 def checkTokenYellow(tokenizedQuery, yellowterms):

@@ -9,7 +9,7 @@ from nltk.tag import pos_tag
 import scorer
 
 
-filename = 'GC_Tr_100_small.xml'
+filename = 'GC_Tr_100.xml'
 dictQueries = xmlToDict(filename)
 
 # Iterate over the dictionary and save the queries in a list
@@ -77,10 +77,9 @@ for eachPredictedLocation in predictedLocation:
 
 for i in range(len(_predictedLocation)):
     if (predictedWhat[i]) or (_predictedLocation[i] != 'NA'):
-        tmp = nltk.word_tokenize(_predictedLocation[i])
-        pos = predictedWhere[i].index(tmp[0])
-        predictedWhat[i] = predictedWhere[i][0:pos]
-        _predictedLocation[i] = ' '.join(predictedWhere[i][pos:])
+        tmp  =' '.join(predictedWhere[i])
+        loc = ' '.join(predictedLocation[i])
+        predictedWhat[i] = [tmp.strip(loc)]
     if (_predictedLocation[i]!= 'NA'):
         predictedWhere[i] = ""
 # If query contains a location term, then refer the query as a local query.
@@ -142,7 +141,7 @@ for _everyPredictedLocation in _predictedLocation:
         _geoCoordinates.append(getCoordinates(_everyPredictedLocation))
     else:
         _geoCoordinates.append('')
-    
+'''
 # Round the geo coordinates to 2 digits and format it as '40.23,<space>-75.30'
 _geoCoordinatesRounded = []
 for _eachGeoCoordinate in _geoCoordinates:
@@ -155,7 +154,7 @@ for _eachGeoCoordinate in _geoCoordinates:
     else:
         _geoCoordinatesRounded.append('')
 
-'''
+''''''
 Determination of WHAT TYPE:
 If number of tokens in a query is equal to the number of tokens in the corresponding location, then query is of type MAP. 
 '''
@@ -186,9 +185,13 @@ for sublist in predictedGeo:
     for val in sublist:
         _predictedGeo.append(val.upper())
 
+for i in range(len(_predictedLocation)):
+    if _predictedLocation[i] == 'NA':
+        _predictedLocation[i] = ""
+
 
 toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhat, _predictedWhatType, _predictedGeo , _predictedLocation, _geoCoordinates)
 
-precission, recall, fi = scorer.score("output/finalOutput.xml","GC_Tr_100_small.xml")
+precission, recall, fi = scorer.score("output/finalOutput.xml","GC_Tr_100.xml")
 
 print precission,recall,fi
