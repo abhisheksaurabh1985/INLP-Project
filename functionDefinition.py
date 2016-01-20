@@ -99,6 +99,12 @@ def toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhatTerm, _predi
     lf.saveQueriesToXml(toSave,'./output/finalOutput.xml')
 #seems to be that listquery number does not have integers, it has lists
 
+'''
+getYellowTerms returns the loaded file terms obtained from Yelp with business
+and places for yellow pages. Once loaded, the list of words is tokenized and
+stemmed in order to avoid singular/plural differences from the words to compare with.
+Returns a set (unique elements) of stems used for yellow page identification.
+'''
 def getYellowTerms (file):
     yellowterms = []
     with open(file,"r") as file:
@@ -116,6 +122,10 @@ def getYellowTerms (file):
         yellowterms = set(yellow_stems)
     return yellowterms
 
+'''
+Compares the stem of each element of a given tokenized query with the
+elements of the yellow page set.
+'''
 def checkTokenYellow(tokenizedQuery, yellowterms):
     stemmer = nltk.stem.porter.PorterStemmer()
 
@@ -124,8 +134,13 @@ def checkTokenYellow(tokenizedQuery, yellowterms):
             return True
     return False
 
-def filterGeoRelation(query_tokens):
 
+'''
+Parse the grammar over the tokenized queries. Returns the structure
+of the given grammar if matched, and no tree with the structure
+otherwise.
+'''
+def filterGeoRelation(query_tokens):
 	grammar = r"""
 				WHERE: 	<IN.*>+{<DT>?<NN.*>+<.*>*}
 				WHERE: 	<IN.*>+{<JJ.*>*<NN.*>+<.*>*}
@@ -138,6 +153,11 @@ def filterGeoRelation(query_tokens):
 	res = cp.parse(query_tokens)
 	return res
 
+'''
+Builds the what, geo and where terms from the given tree by the output
+of filterGeoRelation. If no tree was found with the grammar, returns
+empty lists for the triplet elements.
+'''
 def getGeoTriplet(result):
     where = []
     what = []

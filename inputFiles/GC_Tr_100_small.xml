@@ -1,0 +1,34 @@
+<EXAMPLE-SET>
+<QUERYNO>3687</QUERYNO>
+  <QUERY>3d baby ultrasound imaging in west covina</QUERY>
+  <LOCAL>NO</LOCAL>
+  <WHAT>3d baby ultrasound imaging</WHAT>
+  <WHAT-TYPE>Yellow page</WHAT-TYPE>
+  <GEO-RELATION>IN</GEO-RELATION>
+  <WHERE></WHERE>
+  <LAT-LONG></LAT-LONG>
+    <QUERYNO>7702</QUERYNO>
+  <QUERY>about australia</QUERY>
+  <LOCAL>YES</LOCAL>
+  <WHAT></WHAT>
+  <WHAT-TYPE>Map</WHAT-TYPE>
+  <GEO-RELATION></GEO-RELATION>
+  <WHERE>australia</WHERE>
+  <LAT-LONG>134.75, -24.78</LAT-LONG>
+    <QUERYNO>9049</QUERYNO>
+  <QUERY>accommodation near fort william</QUERY>
+  <LOCAL>NO</LOCAL>
+  <WHAT>accommodation</WHAT>
+  <WHAT-TYPE>Information</WHAT-TYPE>
+  <GEO-RELATION>NEAR</GEO-RELATION>
+  <WHERE></WHERE>
+  <LAT-LONG></LAT-LONG>
+    <QUERYNO>69511</QUERYNO>
+  <QUERY>basketball court in petaling jaya</QUERY>
+  <LOCAL>YES</LOCAL>
+  <WHAT>basketball court in</WHAT>
+  <WHAT-TYPE>Yellow page</WHAT-TYPE>
+  <GEO-RELATION></GEO-RELATION>
+  <WHERE>petaling jaya</WHERE>
+  <LAT-LONG>101.64, 3.11</LAT-LONG>
+</EXAMPLE-SET>

@@ -2,6 +2,8 @@
 
 import xml.etree.ElementTree as ET
 
+def xstr(s):
+    return '' if s is None else str(s)
 
 class Query:
     def __init__(self,query_no,query,local,query_what,query_type,geo_relation,query_where,lat_long):
@@ -13,6 +15,8 @@ class Query:
         self.geo_relation=geo_relation
         self.query_where=query_where
         self.lat_long=lat_long
+
+
     
     #Checks if the Query is the same Query than the other one
 	#return: Boolean indicating whether the two Queries are the same or not
@@ -22,7 +26,7 @@ class Query:
     #Compares the Query object with the correct Query
 	#return: Boolean indicating whether the Query is correct or not 
     def is_correct(self,golden):
-        return (self.local==golden.local and self.query_what==golden.query_what and self.query_type==golden.query_type
+        return (self.local==golden.local and xstr(self.query_what).lower()==xstr(golden.query_what).lower() and xstr(self.query_type).lower()==xstr(golden.query_type).lower()
                 and  str(golden.query_where).lower().split(',')[0]
                 in str(self.query_where).lower())
     
@@ -110,13 +114,16 @@ def obtain_score(to_test,golden, unsorted = True, usepaper = False):
         recall = correct_local/float(local)
 
     score = 2.0*precision*recall/(precision+recall)
+    print "Matched queries: ", correct
 
     return precision, recall, score
 
 if __name__ == "__main__":
     # Tester
-    inputGolden = "GC_Test_solved_100.xml"
+    inputGolden = "inputFiles/GC_Test_solved_100.xml"
     inputUser = "./output/finalOutput.xml"
+    #inputGolden = "GC_Tr_100.xml"
+    #inputUser = "./output/finalOutput_train.xml"
 
     queries = parser(inputUser)
     goldens = parser(inputGolden)

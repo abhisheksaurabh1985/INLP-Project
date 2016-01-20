@@ -9,7 +9,9 @@ from nltk.tag import pos_tag
 import scorer
 
 print 'Parsing XML File'
-filename = 'GC_Test_Not_Solved_100.xml'
+# Path to file to apply the geoquery tagger
+#filename = 'GC_Tr_100.xml'
+filename = 'inputFiles/GC_Test_Not_Solved_100.xml'
 #filename = 'GC_Tr_100_small.xml'
 dictQueries = xmlToDict(filename)
 
@@ -33,6 +35,10 @@ solution = []
 predictedWhere = []
 predictedGeo = []
 predictedWhat = []
+
+'''
+Obtains triplet of what,geo,where from applying the chunker.
+'''
 for query,notagged in zip(taggedTokenizedQueries,tokenizedQueries):
     result = filterGeoRelation(query)
     where, geo, what = getGeoTriplet(result)
@@ -104,10 +110,6 @@ for value in _predictedLocation:
     else:
         isLocalQuery.append('NO')
 
-# Read predefined realtion types from file. 
-# Pre defined relation types are in the file in the inputFiles folder
-#with open('./inputFiles/geoRelationTypeDictionary', 'r') as f:
-#    listGeoRelationType = f.read().split()
 
 
 
