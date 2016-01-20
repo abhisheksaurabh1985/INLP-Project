@@ -9,7 +9,8 @@ from nltk.tag import pos_tag
 import scorer
 
 print 'Parsing XML File'
-filename = 'GC_Tr_100_small.xml'
+filename = 'GC_Test_Not_Solved_100.xml'
+#filename = 'GC_Tr_100_small.xml'
 dictQueries = xmlToDict(filename)
 
 # Iterate over the dictionary and save the queries in a list
@@ -81,29 +82,24 @@ for eachPredictedLocation in predictedLocation:
         _predictedLocation.append('NA')
 
 for i in range(len(_predictedLocation)):
-    if (predictedWhat[i]) or (_predictedLocation[i] != 'NA'):
-        #tmp  =' '.join(predictedWhere[i])
-        #loc = ' '.join(predictedLocation[i])
-        #predictedWhat[i] = [tmp.strip(loc)]
-        tmp = nltk.word_tokenize(_predictedLocation[i])
+    if not predictedWhat[i]:
+        if _predictedLocation[i] != 'NA':
+            tmp = nltk.word_tokenize(_predictedLocation[i])
+
         if tmp[0] in predictedWhere[i]:
             pos = predictedWhere[i].index(tmp[0])
             predictedWhat[i] = predictedWhere[i][0:pos]
-            _predictedLocation[i] = ' '.join(predictedWhere[i][pos:])
-
-    if (_predictedLocation[i]!= 'NA'):
-        predictedWhere[i] = ""
-    #for j in range(len(predictedWhat[i])):
-    #   if tmp[j] in coordinates:
-    #      indx = coordinates.index(tmp[j])
-    #     predictedWhat[i] = predictedWhat[i][0:j]
-    #    predictedGeo[i] = geocords[indx]
-
-
+    if predictedGeo[i] == 'of' or predictedGeo[i] == 'in':
+        posblcoord = predictedWhat[i][-1]
+        newgeo = iscoord(posblcoord,predictedGeo[i])
+        if newgeo:
+            predictedGeo[i] = newgeo
+            predictedWhat[i] = predictedWhat[i][:-1
+                               ]
 # If query contains a location term, then refer the query as a local query.
 isLocalQuery = []
-for _PredictedLocation in _predictedLocation:
-    if _PredictedLocation != 'NA':
+for value in _predictedLocation:
+    if value != 'NA':
         isLocalQuery.append('YES')
     else:
         isLocalQuery.append('NO')
@@ -133,9 +129,12 @@ _predictedWhatType = []
 yellowTerms = getYellowTerms('./terms')
 
 
-for what in predictedWhat:
+for what,where in zip(predictedWhat,_predictedLocation):
     if not what:
-        _predictedWhatType.append('MAP')
+        if where=='NA':
+            _predictedWhatType.append("")
+        else:
+            _predictedWhatType.append('Map')
     elif checkTokenYellow(what,yellowTerms):
         _predictedWhatType.append('Yellow page')
     else:
@@ -151,12 +150,17 @@ _predictedWhat = []
 for list in predictedWhat:
     _predictedWhat.append(','.join(list).replace(','," "))
 
+
+
 _predictedGeo = []
 for sublist in predictedGeo:
     if not sublist:
         _predictedGeo.append("")
     for val in sublist:
-        _predictedGeo.append(val.upper())
+        if val.upper() in valids:
+            _predictedGeo.append(val.upper())
+        else:
+            _predictedGeo.append("")
 
 for i in range(len(_predictedLocation)):
     if _predictedLocation[i] == 'NA':

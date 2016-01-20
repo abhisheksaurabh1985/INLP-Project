@@ -131,7 +131,7 @@ def filterGeoRelation(query_tokens):
 				WHERE: 	<IN.*>+{<JJ.*>*<NN.*>+<.*>*}
 				WHAT:	{<.*>+}<IN>+<WHERE>
 				GEOR:	<WHAT>{<IN>+}<WHERE>
-				GEOR:   {<IN>+}<LOC>
+				GEOR:   {<IN>+}<WHERE>
 				"""
 
 	cp = nltk.RegexpParser(grammar)
@@ -162,4 +162,18 @@ def getGeoTriplet(result):
 
 
 coordinates = ['north','south','west','east','northwest','northeast','southwest','southeast']
-geocords = ['NORTH_OF','SOUTH_OF','WEST_OF','EAST_OF','NORTH_WEST_OF','NOTRH_EAST_OF','SOUTH_WEST_OF','SOUTH_EAST_OF']
+geocordsof = ['NORTH_OF','SOUTH_OF','WEST_OF','EAST_OF','NORTH_WEST_OF','NORTH_EAST_OF','SOUTH_WEST_OF','SOUTH_EAST_OF']
+geocordsin = ['NORTH_IN','SOUTH_IN','WEST_IN','EAST_IN','NORTH_WEST_IN','NORTH_EAST_IN','SOUTH_WEST_IN','SOUTH_EAST_IN']
+
+valids = ['IN','ON','OF','NEAR','IN_NEAR','ALONG','AT','FROM','TO','DISTANCE']
+valids.extend(geocordsin)
+valids.extend(geocordsin)
+
+def iscoord(coord,geo):
+    if coord in coordinates:
+        pos = coordinates.index(coord)
+        if geo == 'of':
+            return geocordsof[pos]
+        elif geo == 'in':
+            return geocordsin[pos]
+    return []
