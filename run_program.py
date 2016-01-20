@@ -9,7 +9,7 @@ from nltk.tag import pos_tag
 import scorer
 
 print 'Parsing XML File'
-filename = 'GC_Test_Not_Solved_100.xml'
+filename = 'GC_Tr_100_small.xml'
 #filename = 'GC_Tr_100_small.xml'
 dictQueries = xmlToDict(filename)
 
@@ -56,7 +56,7 @@ print 'Querying DBpedia    ..........3/5 '
 # Search nGrams in dbPedia for match
 predictedLocation = []
 for eachListItem in nGramCandidateLocation:
-    print i
+    print 'Query #{} to dbPedia'.format(i)
     tempPredictedLocation = []
     for each in eachListItem:
         if len(each) > 0:
@@ -85,7 +85,7 @@ for i in range(len(_predictedLocation)):
     if not predictedWhat[i]:
         if _predictedLocation[i] != 'NA':
             tmp = nltk.word_tokenize(_predictedLocation[i])
-
+            
         if tmp[0] in predictedWhere[i]:
             pos = predictedWhere[i].index(tmp[0])
             predictedWhat[i] = predictedWhere[i][0:pos]
@@ -162,14 +162,18 @@ for sublist in predictedGeo:
         else:
             _predictedGeo.append("")
 
+# Deal with non-local queries. All the query fields have to be empty.
 for i in range(len(_predictedLocation)):
     if _predictedLocation[i] == 'NA':
         _predictedLocation[i] = ""
+        _predictedWhat[i] = ""
+        _predictedWhatType[i] = ""
+        _predictedGeo[i] = ""
 
 
 toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhat, _predictedWhatType, _predictedGeo , _predictedLocation, _geoCoordinates)
 print 'DONE!'
 
-execfile('./scorer.py')
+#execfile('./scorer.py')
 
 

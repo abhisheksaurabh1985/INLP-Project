@@ -120,7 +120,7 @@ def checkTokenYellow(tokenizedQuery, yellowterms):
     stemmer = nltk.stem.porter.PorterStemmer()
 
     for word in tokenizedQuery:
-        if stemmer.stem(word.strip()) in yellowterms:
+        if stemmer.stem(word.lower().strip()) in yellowterms:
             return True
     return False
 
