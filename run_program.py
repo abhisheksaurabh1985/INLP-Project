@@ -9,7 +9,7 @@ from nltk.tag import pos_tag
 import scorer
 
 print 'Parsing XML File'
-filename = 'GC_Tr_100_small.xml'
+filename = 'GC_Test_Not_Solved_100.xml'
 #filename = 'GC_Tr_100_small.xml'
 dictQueries = xmlToDict(filename)
 
@@ -85,10 +85,10 @@ for i in range(len(_predictedLocation)):
     if not predictedWhat[i]:
         if _predictedLocation[i] != 'NA':
             tmp = nltk.word_tokenize(_predictedLocation[i])
-            
-        if tmp[0] in predictedWhere[i]:
-            pos = predictedWhere[i].index(tmp[0])
-            predictedWhat[i] = predictedWhere[i][0:pos]
+
+        if tmp[0] in tokenizedQueries[i]:
+            pos = tokenizedQueries[i].index(tmp[0])
+            predictedWhat[i] = tokenizedQueries[i][0:pos]
     if predictedGeo[i] == 'of' or predictedGeo[i] == 'in':
         posblcoord = predictedWhat[i][-1]
         newgeo = iscoord(posblcoord,predictedGeo[i])
@@ -136,7 +136,7 @@ for what,where in zip(predictedWhat,_predictedLocation):
         else:
             _predictedWhatType.append('Map')
     elif checkTokenYellow(what,yellowTerms):
-        _predictedWhatType.append('Yellow page')
+        _predictedWhatType.append('Yellow Page')
     else:
         _predictedWhatType.append('Information')
 
@@ -174,6 +174,6 @@ for i in range(len(_predictedLocation)):
 toXML(listQueryNumber, listQueries, isLocalQuery, _predictedWhat, _predictedWhatType, _predictedGeo , _predictedLocation, _geoCoordinates)
 print 'DONE!'
 
-#execfile('./scorer.py')
+execfile('./scorer.py')
 
 

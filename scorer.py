@@ -88,8 +88,10 @@ def obtain_score(to_test,golden, unsorted = True, usepaper = False):
     wrong_local = 0 # Amount of queries tagged wrongly as local
     for test_query, i in zip(to_test,range(size)):
         # If the current Query is correct
-        if test_query.is_correct(golden[q_num[test_query.query_no] if unsorted else i]): 
+        if test_query.is_correct(golden[q_num[test_query.query_no] if unsorted else i]):
+            test_query.show_query()
             correct += 1
+
             if test_query.local=="YES":
                 correct_local += 1
         else:
